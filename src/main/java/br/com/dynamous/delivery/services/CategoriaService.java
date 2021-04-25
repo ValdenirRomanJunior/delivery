@@ -3,6 +3,7 @@ package br.com.dynamous.delivery.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.dynamous.delivery.domain.Categoria;
@@ -19,12 +20,13 @@ public class CategoriaService {
 		
 		Optional<Categoria> obj =repo.findById(id);		
 			return obj.orElseThrow(()-> new ObjectNotFoundException
-					("objeto nao encontrado Id:" +id + ",Tipo:" + Categoria.class.getName()));
-			
+					("objeto nao encontrado Id:" +id + ",Tipo:" + Categoria.class.getName()));	
 		
-		
-		
-		
+	}
+	
+	public Categoria insert(Categoria obj) {
+		obj.setId(null);
+		return repo.save(obj);
 	}
 
 }
